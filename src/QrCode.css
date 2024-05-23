@@ -1,0 +1,130 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    text-align: center;
+    background: linear-gradient(8.19deg, #dbeeff 8.06%, #ffdefd 168.17%);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.header h1 {
+    color: #1773ea;
+    font-size: 30px
+}
+
+.header p {
+    color: #333333;
+}
+
+.qr-border {
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #d8d6de;
+    padding: 10px 10px 10px 15px;
+    display: inline-flex;
+    align-items: center;
+    width: 140px;
+    justify-content: space-between;
+    margin: 7px 7px 7px 0;
+}
+
+.container {
+    display: flex;
+    margin: 100px;
+}
+
+.child-conatiner {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 6%);
+    padding: 30px 25px
+}
+.child-conatiner h4{
+    font-size: 16px;
+    font-weight: 400;
+}
+.child-conatiner1 {
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 6%);
+    padding: 30px 25px
+}
+
+.child-conatiner:first-child {
+    width: 55%;
+    margin-right: 40px;
+}
+
+.child-conatiner1 {
+    width: 45%;
+}
+
+.child-conatiner h5 {
+    margin-top: 20px;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.qr-border h5 {
+    font-size: 15px;
+    color: #333;
+    font-weight: 400;
+    line-height: 18px;
+    margin: 10px 0;
+    display: block;
+}
+
+.email label {
+    margin: 10px 0
+}
+
+/* Mobile*/
+@media (max-width: 480px) {
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 30px;
+    }
+
+    .child-conatiner {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .child-conatiner1 {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* tablet*/
+@media (min-width: 481px) and (max-width: 768px) {
+    .container{
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 30px;
+        max-width: 100% !important;
+        margin-top: 30px !important;
+    }
+    .child-conatiner {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    .child-conatiner1 {
+        width: 100% !important;
+        text-align: center;
+    }
+}
+
+/* Laptop and dekstop*/
+@media (min-width: 480px) and (max-width:1024px) {
+    .child-conatiner1{
+        text-align: center;
+        padding: 50px 25px;
+    }
+}
