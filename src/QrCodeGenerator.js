@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./QrCode.css";
 import QRCode from "react-qr-code";
+import { toPng, toSvg } from "html-to-image";
 
 const QrCodeGenerator = () => {
   const [url, setUrl] = useState("");
@@ -13,6 +14,9 @@ const QrCodeGenerator = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [pdf, setPdf] = useState('')
+
+  const qrRef = useRef(null);
+
 
   const handleRadioChange = (e) => {
     setSelectedValue(e.target.value);
@@ -45,7 +49,36 @@ const QrCodeGenerator = () => {
     }
   }
 
+
   const dataTypes = url || phoneNum || sms || txt || email || subject || message || pdf
+
+  // Download QR Code as PNG
+  const downloadPng = () => {
+    if (dataTypes) {
+      toPng(qrRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "qr-code.png";
+          link.click();
+        })
+        .catch((err) => console.error("Error generating PNG:", err));
+    }
+  };
+
+  // Download QR Code as SVG
+  const downloadSvg = () => {
+    if (dataTypes) {
+      toSvg(qrRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "qr-code.svg";
+          link.click();
+        })
+        .catch((err) => console.error("Error generating SVG:", err));
+    }
+  };
   return (
     <div>
       <div className="App" F>
@@ -235,16 +268,23 @@ const QrCodeGenerator = () => {
           )}
         </div>
         <div className="child-conatiner1">
-          {dataTypes ? (
-            <QRCode
-              style={{ height: '180px' }}
-              value={qrCodeGenerate()} />
-          ) : (
-            <QRCode
-              style={{ height: '180px' }}
-              value={'Please Enter the Data then scan the QR Code to access data!'} />
-          )}<br /><br />
+          <div ref={qrRef} style={{ background: "white", padding: "10px" }}>
+            {dataTypes ? (
+              <QRCode
+                style={{ height: '180px' }}
+                value={qrCodeGenerate()} />
+            ) : (
+              <QRCode
+                style={{ height: '180px' }}
+                value={'Please Enter the Data then scan the QR Code to access data!'} />
+            )}<br /><br />
+          </div>
           <h5>Scan the QR Code to access data!</h5>
+          {/* Download Buttons */}
+          <div className="button-group">
+            <button onClick={downloadPng} style={{ margin: "10px", padding: "10px" }} className="btn btn-primary">Download PNG</button>
+            <button onClick={downloadSvg} style={{ margin: "10px", padding: "10px" }} className="btn btn-success">Download SVG</button>
+          </div>
         </div>
       </div>
     </div>
